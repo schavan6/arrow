@@ -363,7 +363,8 @@ const char* gdv_fn_aes_decrypt(int64_t context, const char* data, int32_t data_l
     *out_len = gandiva::aes_decrypt(data, data_len, key_data,
                                     reinterpret_cast<unsigned char*>(ret));
   } catch (const std::runtime_error& e) {
-    gdv_fn_context_set_error_msg(context, e.what());
+    std::string err_msg = "Error occurred while decrypting ciphertext.";
+    gdv_fn_context_set_error_msg(context, err_msg.data());
   }
 
   return ret;
