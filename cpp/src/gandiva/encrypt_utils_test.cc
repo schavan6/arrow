@@ -151,5 +151,4 @@ TEST(TestShaEncryptUtils, TestAesEncryptDecrypt) {
 
   EXPECT_EQ(std::string(reinterpret_cast<const char*>(to_encrypt), to_encrypt_len),
             std::string(reinterpret_cast<const char*>(decrypted_7), decrypted_7_len));
-
 }
