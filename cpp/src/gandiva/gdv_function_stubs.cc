@@ -332,8 +332,8 @@ const char* gdv_fn_aes_encrypt(int64_t context, const char* data, int32_t data_l
     *out_len = gandiva::aes_encrypt(data, data_len, key_data,
                                     reinterpret_cast<unsigned char*>(ret));
   } catch (const std::runtime_error& e) {
-    gdv_fn_context_set_error_msg(context, e.what());
-    return nullptr;
+    std::string err_msg = "Following error occurred while encrypting ciphertext - " + std::string(e.what());
+    gdv_fn_context_set_error_msg(context, err_msg.data());
   }
 
   return ret;
@@ -363,7 +363,7 @@ const char* gdv_fn_aes_decrypt(int64_t context, const char* data, int32_t data_l
     *out_len = gandiva::aes_decrypt(data, data_len, key_data,
                                     reinterpret_cast<unsigned char*>(ret));
   } catch (const std::runtime_error& e) {
-    std::string err_msg = "Error occurred while decrypting ciphertext.";
+    std::string err_msg = "Following error occurred while decrypting ciphertext - " + std::string(e.what());
     gdv_fn_context_set_error_msg(context, err_msg.data());
   }
 
